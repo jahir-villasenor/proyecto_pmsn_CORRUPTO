@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "966177179852",
+    "project_id": "pmsn-villasenor-vazquez",
+    "storage_bucket": "pmsn-villasenor-vazquez.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966177179852:android:c11a941503822edbec9a69",
+        "android_client_info": {
+          "package_name": "com.example.proyecto_pmsn_villasenor_y_vazquez"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "966177179852-a27huf3nkgddv32momugufhksfqf96ad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAE2d1TcD_EAffdxwHjtZaqPrEfa-ss4dk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "966177179852-a27huf3nkgddv32momugufhksfqf96ad.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

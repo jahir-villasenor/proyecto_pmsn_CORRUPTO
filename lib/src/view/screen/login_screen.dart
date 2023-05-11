@@ -124,19 +124,23 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(
                           height: 30,
                         ),
-                        Container(
-                          height: 40,
-                          margin: const EdgeInsets.symmetric(horizontal: 50),
-                          decoration: BoxDecoration(
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50),
-                              color: AppColor.darkOrange),
-                          child: const Center(
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                  color: AppColor.lightGrey,
-                                  fontWeight: FontWeight.bold),
                             ),
+                            backgroundColor: AppColor.darkOrange,
+                            elevation: 2,
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 100),
+                            minimumSize: const Size(0, 40),
+                          ),
+                          child: const Text(
+                            "Login",
+                            style: TextStyle(
+                                color: AppColor.lightGrey,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                         const SizedBox(

@@ -1,9 +1,29 @@
 import 'package:auth_buttons/auth_buttons.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/core/app_color.dart';
 
-class RegisterScreen extends StatelessWidget {
+import '../../firebase/email_auth.dart';
+import '../../firebase/facebook_auth.dart';
+import '../../firebase/google_auth.dart';
+
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
+  @override
+  RegisterScreenState createState() {
+    return RegisterScreenState();
+  }
+}
+
+class RegisterScreenState extends State<RegisterScreen> {
+  final _formKey = GlobalKey<FormState>();
+  String _errorMessage = '';
+  EmailAuth emailAuth = EmailAuth();
+  TextEditingController conEmail = TextEditingController();
+  TextEditingController conPass = TextEditingController();
+  GoogleAuth googleAuth = GoogleAuth();
+  FaceAuth faceAuth = FaceAuth();
 
   @override
   Widget build(BuildContext context) {
@@ -54,129 +74,238 @@ class RegisterScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                        const SizedBox(
-                          height: 60,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: AppColor.lightGrey,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: const [
-                                BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10))
-                              ]),
+                        Form(
+                          key: _formKey,
                           child: Column(
                             children: <Widget>[
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: const BoxDecoration(
-                                    border: Border(
-                                        bottom: BorderSide(
-                                            color: AppColor.lightGrey))),
-                                child: const TextField(
-                                  decoration: InputDecoration(
-                                      hintText: "Name",
-                                      hintStyle:
-                                          TextStyle(color: AppColor.darkGrey),
-                                      border: InputBorder.none),
-                                ),
+                              const SizedBox(
+                                height: 60,
                               ),
                               Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: const BoxDecoration(
-                                    border: Border(
-                                        bottom: BorderSide(
-                                            color: AppColor.lightGrey))),
-                                child: const TextField(
-                                  decoration: InputDecoration(
-                                      hintText: "Email",
-                                      hintStyle:
-                                          TextStyle(color: AppColor.darkGrey),
-                                      border: InputBorder.none),
+                                decoration: BoxDecoration(
+                                    color: AppColor.lightGrey,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color:
+                                              Color.fromRGBO(225, 95, 27, .3),
+                                          blurRadius: 20,
+                                          offset: Offset(0, 10))
+                                    ]),
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                        padding: const EdgeInsets.all(10),
+                                        decoration: const BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color:
+                                                        AppColor.lightGrey))),
+                                        child: TextFormField(
+                                          decoration: const InputDecoration(
+                                            icon: Icon(Icons.person),
+                                            hintText: 'Insert your Name',
+                                            labelText: 'Name',
+                                          ),
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Please enter some text';
+                                            }
+                                            return null;
+                                          },
+                                        )),
+                                    Container(
+                                        padding: const EdgeInsets.all(10),
+                                        decoration: const BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color:
+                                                        AppColor.lightGrey))),
+                                        child: TextFormField(
+                                          controller: conEmail,
+                                          decoration: const InputDecoration(
+                                            icon: Icon(Icons.email),
+                                            hintText: 'Insert your email',
+                                            labelText: 'Email',
+                                          ),
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return "Email can not be empty";
+                                            } else if (!EmailValidator.validate(
+                                                value, true)) {
+                                              return "Invalid Email Address";
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                        )),
+                                    Container(
+                                        padding: const EdgeInsets.all(10),
+                                        decoration: const BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color:
+                                                        AppColor.lightGrey))),
+                                        child: TextFormField(
+                                          controller: conPass,
+                                          obscureText: true,
+                                          decoration: const InputDecoration(
+                                            icon: Icon(Icons.lock),
+                                            hintText: 'Insert your Password',
+                                            labelText: 'Password',
+                                          ),
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Please enter some text';
+                                            }
+                                            return null;
+                                          },
+                                        )),
+                                  ],
                                 ),
                               ),
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: const BoxDecoration(
-                                    border: Border(
-                                        bottom: BorderSide(
-                                            color: AppColor.lightGrey))),
-                                child: const TextField(
-                                  decoration: InputDecoration(
-                                      hintText: "Password",
-                                      hintStyle:
-                                          TextStyle(color: AppColor.darkGrey),
-                                      border: InputBorder.none),
+                              const SizedBox(
+                                height: 50,
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    emailAuth
+                                        .registerWithEmailAndPassword(
+                                            email: conEmail.text,
+                                            password: conPass.text)
+                                        .then((value) {
+                                      if (value) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text(
+                                                  'User successfully registered')),
+                                        );
+                                        Navigator.pushNamed(context, '/login');
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text(
+                                                  'There is already a registered user with this account')),
+                                        );
+                                      }
+                                    });
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  backgroundColor: AppColor.darkOrange,
+                                  elevation: 2,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 100),
+                                  minimumSize: const Size(0, 40),
                                 ),
+                                child: const Text(
+                                  "Register",
+                                  style: TextStyle(
+                                      color: AppColor.lightGrey,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 40,
+                              ),
+                              const Text(
+                                "Or register with social media",
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Container(
+                                      height: 50,
+                                      child: Center(
+                                        child: FacebookAuthButton(
+                                          onPressed: () {
+                                            faceAuth
+                                                .signUpWithFacebook()
+                                                .then((value) {
+                                              if (value) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  const SnackBar(
+                                                      content: Text(
+                                                          'User successfully registered')),
+                                                );
+                                                Navigator.pushNamed(
+                                                    context, '/login');
+                                              } else {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  const SnackBar(
+                                                      content: Text(
+                                                          'There is already a registered user with this account')),
+                                                );
+                                              }
+                                            });
+                                          },
+                                          themeMode: ThemeMode.light,
+                                          style: const AuthButtonStyle(
+                                            buttonType: AuthButtonType.icon,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 30,
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      height: 50,
+                                      child: Center(
+                                        child: GoogleAuthButton(
+                                          onPressed: () {
+                                            googleAuth
+                                                .registerWithGoogle()
+                                                .then((value) {
+                                              if (value) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  const SnackBar(
+                                                      content: Text(
+                                                          'User successfully registered')),
+                                                );
+                                                Navigator.pushNamed(
+                                                    context, '/login');
+                                              } else {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  const SnackBar(
+                                                      content: Text(
+                                                          'There is already a registered user with this account')),
+                                                );
+                                              }
+                                            });
+                                          },
+                                          themeMode: ThemeMode.light,
+                                          style: const AuthButtonStyle(
+                                            buttonType: AuthButtonType.icon,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        Container(
-                          height: 40,
-                          margin: const EdgeInsets.symmetric(horizontal: 50),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: AppColor.darkOrange),
-                          child: const Center(
-                            child: Text(
-                              "Register",
-                              style: TextStyle(
-                                  color: AppColor.lightGrey,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        const Text(
-                          "Or register with social media",
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: Container(
-                                height: 50,
-                                child: Center(
-                                  child: FacebookAuthButton(
-                                    onPressed: () {},
-                                    themeMode: ThemeMode.light,
-                                    style: const AuthButtonStyle(
-                                      buttonType: AuthButtonType.icon,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 30,
-                            ),
-                            Expanded(
-                              child: Container(
-                                height: 50,
-                                child: Center(
-                                  child: GoogleAuthButton(
-                                    onPressed: () {},
-                                    themeMode: ThemeMode.light,
-                                    style: const AuthButtonStyle(
-                                      buttonType: AuthButtonType.icon,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        )
                       ],
                     ),
                   ),
