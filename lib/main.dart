@@ -1,7 +1,8 @@
 import 'dart:ui' show PointerDeviceKind;
 import 'package:flutter/material.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/core/app_theme.dart';
-import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/home_screen.dart';
+import 'package:proyecto_pmsn_villasenor_y_vazquez/routes.dart';
+import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/login_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
         },
       ),
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: const LoginScreen(),
+      routes: getApplicationRoutes(),
       theme: AppTheme.lightAppTheme,
     );
   }
