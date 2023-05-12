@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Column(
                             children: <Widget>[
                               const SizedBox(
-                                height: 60,
+                                height: 50,
                               ),
                               Container(
                                 decoration: BoxDecoration(
@@ -140,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               const SizedBox(
-                                height: 40,
+                                height: 30,
                               ),
                               TextButton(
                                   onPressed: () {
@@ -180,14 +180,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                       Navigator.pushNamed(context, '/dash');
                                     } else {
                                       isLoading = false;
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                            content: Text(
-                                                'The email is not registered')),
+
+                                      showDialog<String>(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                          title: const Text(
+                                              'Email does not exist',
+                                              style: TextStyle(fontSize: 20)),
+                                          content: const Text(
+                                              'Email not registered, create a new account in the Sign in section'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(context, 'OK'),
+                                              child: const Text('OK'),
+                                            ),
+                                          ],
+                                        ),
                                       );
                                       setState(() {});
-                                      //snackbar error
                                     }
                                   });
                                 },
@@ -238,9 +250,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 isLoading = false;
                                               } else {
                                                 isLoading = false;
-                                                const SnackBar(
-                                                  content: Text(
-                                                      'The email is not registered'),
+                                                showDialog<String>(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          AlertDialog(
+                                                    title: const Text(
+                                                        'The Facebook user has not been registered',
+                                                        style: TextStyle(
+                                                            fontSize: 20)),
+                                                    content: const Text(
+                                                        'Please, create an account with facebook from the sign in section'),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                context, 'OK'),
+                                                        child: const Text('OK'),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 );
                                               }
                                               setState(() {});
@@ -276,9 +305,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                               } else {
                                                 isLoading = false;
                                                 setState(() {});
-                                                const SnackBar(
-                                                  content: Text(
-                                                      'The email is not registered'),
+                                                showDialog<String>(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          AlertDialog(
+                                                    title: const Text(
+                                                        'The Google user has not been registered',
+                                                        style: TextStyle(
+                                                            fontSize: 20)),
+                                                    content: const Text(
+                                                        'Please, create an account with Google account from the sign in section'),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                context, 'OK'),
+                                                        child: const Text('OK'),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 );
                                               }
                                             });

@@ -179,19 +179,43 @@ class RegisterScreenState extends State<RegisterScreen> {
                                             password: conPass.text)
                                         .then((value) {
                                       if (value) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text(
-                                                  'User successfully registered')),
+                                        showDialog<String>(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              AlertDialog(
+                                            title: const Text(
+                                                'Successfully registered user',
+                                                style: TextStyle(fontSize: 20)),
+                                            content: const Text(
+                                                'Open the link sent to your email to confirm your email'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    context, 'OK'),
+                                                child: const Text('OK'),
+                                              ),
+                                            ],
+                                          ),
                                         );
                                         Navigator.pushNamed(context, '/login');
                                       } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text(
-                                                  'There is already a registered user with this account')),
+                                        showDialog<String>(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              AlertDialog(
+                                            title: const Text(
+                                                'Email already exists',
+                                                style: TextStyle(fontSize: 20)),
+                                            content: const Text(
+                                                'The email is already associated with another account'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    context, 'OK'),
+                                                child: const Text('OK'),
+                                              ),
+                                            ],
+                                          ),
                                         );
                                       }
                                     });
@@ -236,20 +260,50 @@ class RegisterScreenState extends State<RegisterScreen> {
                                                 .signUpWithFacebook()
                                                 .then((value) {
                                               if (value) {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  const SnackBar(
-                                                      content: Text(
-                                                          'User successfully registered')),
+                                                showDialog<String>(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          AlertDialog(
+                                                    title: const Text(
+                                                        'Facebook user successfully registered',
+                                                        style: TextStyle(
+                                                            fontSize: 20)),
+                                                    content: const Text(
+                                                        'You can login using Facebook right now'),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                context, 'OK'),
+                                                        child: const Text('OK'),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 );
                                                 Navigator.pushNamed(
                                                     context, '/login');
                                               } else {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  const SnackBar(
-                                                      content: Text(
-                                                          'There is already a registered user with this account')),
+                                                showDialog<String>(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          AlertDialog(
+                                                    title: const Text(
+                                                        'The Facebook user is already registered',
+                                                        style: TextStyle(
+                                                            fontSize: 20)),
+                                                    content: const Text(
+                                                        'The Facebook account is already associated with another account'),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                context, 'OK'),
+                                                        child: const Text('OK'),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 );
                                               }
                                             });
@@ -275,20 +329,50 @@ class RegisterScreenState extends State<RegisterScreen> {
                                                 .registerWithGoogle()
                                                 .then((value) {
                                               if (value) {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  const SnackBar(
-                                                      content: Text(
-                                                          'User successfully registered')),
+                                                showDialog<String>(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          AlertDialog(
+                                                    title: const Text(
+                                                        'Google user successfully registered',
+                                                        style: TextStyle(
+                                                            fontSize: 20)),
+                                                    content: const Text(
+                                                        'You can login using Google right now'),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                context, 'OK'),
+                                                        child: const Text('OK'),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 );
                                                 Navigator.pushNamed(
                                                     context, '/login');
                                               } else {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  const SnackBar(
-                                                      content: Text(
-                                                          'There is already a registered user with this account')),
+                                                showDialog<String>(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          AlertDialog(
+                                                    title: const Text(
+                                                        'The Google user is already registered',
+                                                        style: TextStyle(
+                                                            fontSize: 20)),
+                                                    content: const Text(
+                                                        'The Google account is already associated with another account'),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                context, 'OK'),
+                                                        child: const Text('OK'),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 );
                                               }
                                             });
