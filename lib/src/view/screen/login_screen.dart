@@ -169,8 +169,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onPressed: () {
                                   isLoading = true;
                                   setState(() {});
-                                  print(txtemailCont.text);
-                                  print(txtPassController.text);
                                   emailAuth
                                       .signInWithEmailAndPassword(
                                           email: txtemailCont.text,

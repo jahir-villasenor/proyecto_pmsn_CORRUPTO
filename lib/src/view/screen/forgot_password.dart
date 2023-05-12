@@ -1,4 +1,5 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/core/app_color.dart';
 import '../../firebase/email_auth.dart';
@@ -114,29 +115,6 @@ class ForgotScreenState extends State<ForgotScreen> {
                                             }
                                           },
                                         )),
-                                    Container(
-                                        padding: const EdgeInsets.all(10),
-                                        decoration: const BoxDecoration(
-                                            border: Border(
-                                                bottom: BorderSide(
-                                                    color:
-                                                        AppColor.lightGrey))),
-                                        child: TextFormField(
-                                          controller: conPass,
-                                          obscureText: true,
-                                          decoration: const InputDecoration(
-                                            icon: Icon(Icons.lock),
-                                            hintText: 'Insert your Password',
-                                            labelText: 'Password',
-                                          ),
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Please enter some text';
-                                            }
-                                            return null;
-                                          },
-                                        )),
                                   ],
                                 ),
                               ),
@@ -145,30 +123,47 @@ class ForgotScreenState extends State<ForgotScreen> {
                               ),
                               ElevatedButton(
                                 onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    emailAuth
-                                        .registerWithEmailAndPassword(
-                                            email: conEmail.text,
-                                            password: conPass.text)
-                                        .then((value) {
-                                      if (value) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text(
-                                                  'User successfully registered')),
-                                        );
-                                        Navigator.pushNamed(context, '/login');
-                                      } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text(
-                                                  'There is already a registered user with this account')),
-                                        );
-                                      }
-                                    });
-                                  }
+                                  FirebaseAuth.instance
+                                      .sendPasswordResetEmail(
+                                          email: conEmail.text)
+                                      .then((_) {
+                                    showDialog<String>(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          AlertDialog(
+                                        title: const Text('Send new password',
+                                            style: TextStyle(fontSize: 20)),
+                                        content: const Text(
+                                            'Open the link sent to your email to recover your password'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, 'OK'),
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }).catchError((error) {
+                                    showDialog<String>(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          AlertDialog(
+                                        title: const Text(
+                                            'The email does not exist',
+                                            style: TextStyle(fontSize: 20)),
+                                        content: const Text(
+                                            'Create an account in the sign in section'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, 'OK'),
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  });
                                 },
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
