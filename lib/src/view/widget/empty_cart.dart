@@ -8,7 +8,7 @@ class EmptyCart extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: Center(child: Image.asset('assets/images/empty_cart.png')),
+          child: Center(child: Image.asset('./assets/images/empty_cart.png')),
         ),
         const Text(
           "Empty cart",

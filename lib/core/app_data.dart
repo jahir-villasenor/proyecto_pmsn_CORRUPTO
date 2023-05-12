@@ -27,8 +27,8 @@ class AppData {
       quantity: 0,
       images: [
         'assets/images/a53_1.png',
-        'assets/images/a53_2.png',
-        'assets/images/a53_3.png'
+        './assets/images/a53_2.png',
+        './assets/images/a53_3.png'
       ],
       isFavorite: true,
       rating: 1,
@@ -43,8 +43,8 @@ class AppData {
       quantity: 0,
       images: [
         'assets/images/tab_s7_fe_1.png',
-        'assets/images/tab_s7_fe_2.png',
-        'assets/images/tab_s7_fe_3.png'
+        './assets/images/tab_s7_fe_2.png',
+        './assets/images/tab_s7_fe_3.png'
       ],
       isFavorite: false,
       rating: 4,
@@ -58,9 +58,9 @@ class AppData {
       off: null,
       quantity: 0,
       images: [
-        'assets/images/tab_s8_1.png',
-        'assets/images/tab_s8_2.png',
-        'assets/images/tab_s8_3.png',
+        './assets/images/tab_s8_1.png',
+        './assets/images/tab_s8_2.png',
+        './assets/images/tab_s8_3.png',
       ],
       isFavorite: false,
       rating: 3,
@@ -74,9 +74,9 @@ class AppData {
       off: 200,
       quantity: 0,
       images: [
-        'assets/images/galaxy_watch_4_1.png',
-        'assets/images/galaxy_watch_4_2.png',
-        'assets/images/galaxy_watch_4_3.png',
+        './assets/images/galaxy_watch_4_1.png',
+        './assets/images/galaxy_watch_4_2.png',
+        './assets/images/galaxy_watch_4_3.png',
       ],
       isFavorite: false,
       rating: 5,
@@ -97,9 +97,9 @@ class AppData {
       off: null,
       quantity: 0,
       images: [
-        'assets/images/apple_watch_series_7_1.png',
-        'assets/images/apple_watch_series_7_2.png',
-        'assets/images/apple_watch_series_7_3.png',
+        './assets/images/apple_watch_series_7_1.png',
+        './assets/images/apple_watch_series_7_2.png',
+        './assets/images/apple_watch_series_7_3.png',
       ],
       isFavorite: false,
       rating: 4,
@@ -116,10 +116,10 @@ class AppData {
         off: null,
         quantity: 0,
         images: [
-          'assets/images/beats_studio_3-1.png',
-          'assets/images/beats_studio_3-2.png',
-          'assets/images/beats_studio_3-3.png',
-          'assets/images/beats_studio_3-4.png',
+          './assets/images/beats_studio_3-1.png',
+          './assets/images/beats_studio_3-2.png',
+          './assets/images/beats_studio_3-3.png',
+          './assets/images/beats_studio_3-4.png',
         ],
         isFavorite: false,
         rating: 2,
@@ -132,8 +132,8 @@ class AppData {
       off: null,
       quantity: 0,
       images: [
-        'assets/images/samsung_q_60_a_1.png',
-        'assets/images/samsung_q_60_a_2.png',
+        './assets/images/samsung_q_60_a_1.png',
+        './assets/images/samsung_q_60_a_2.png',
       ],
       isFavorite: false,
       rating: 3,
@@ -154,8 +154,8 @@ class AppData {
       off: null,
       quantity: 0,
       images: [
-        'assets/images/sony_x_80_j_1.png',
-        'assets/images/sony_x_80_j_2.png',
+        './assets/images/sony_x_80_j_1.png',
+        './assets/images/sony_x_80_j_2.png',
       ],
       isFavorite: false,
       sizes: ProductSizeType(

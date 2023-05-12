@@ -112,7 +112,7 @@ class ProductListScreen extends StatelessWidget {
                     ),
                     const Spacer(),
                     Image.asset(
-                      'assets/images/shopping.png',
+                      './assets/images/shopping.png',
                       height: 125,
                       fit: BoxFit.cover,
                     )
