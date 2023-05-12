@@ -1,0 +1,207 @@
+import 'package:email_validator/email_validator.dart';
+import 'package:flutter/material.dart';
+import 'package:proyecto_pmsn_villasenor_y_vazquez/core/app_color.dart';
+import '../../firebase/email_auth.dart';
+
+class ForgotScreen extends StatefulWidget {
+  const ForgotScreen({super.key});
+
+  @override
+  ForgotScreenState createState() {
+    return ForgotScreenState();
+  }
+}
+
+class ForgotScreenState extends State<ForgotScreen> {
+  final _formKey = GlobalKey<FormState>();
+  String _errorMessage = '';
+  EmailAuth emailAuth = EmailAuth();
+  TextEditingController conEmail = TextEditingController();
+  TextEditingController conPass = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(begin: Alignment.topCenter, colors: [
+          AppColor.darkOrange,
+          AppColor.lightOrange,
+          Color.fromARGB(255, 255, 167, 38)
+        ])),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const SizedBox(
+              height: 80,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const <Widget>[
+                  Text(
+                    "Forgot your password?",
+                    style: TextStyle(color: AppColor.lightGrey, fontSize: 40),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Complete form to get your new password",
+                    style: TextStyle(color: AppColor.lightGrey, fontSize: 18),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: AppColor.lightGrey,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(60),
+                        topRight: Radius.circular(60))),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(30),
+                    child: Column(
+                      children: <Widget>[
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            children: <Widget>[
+                              const SizedBox(
+                                height: 60,
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: AppColor.lightGrey,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color:
+                                              Color.fromRGBO(225, 95, 27, .3),
+                                          blurRadius: 20,
+                                          offset: Offset(0, 10))
+                                    ]),
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                        padding: const EdgeInsets.all(10),
+                                        decoration: const BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color:
+                                                        AppColor.lightGrey))),
+                                        child: TextFormField(
+                                          controller: conEmail,
+                                          decoration: const InputDecoration(
+                                            icon: Icon(Icons.email),
+                                            hintText: 'Insert your email',
+                                            labelText: 'Email',
+                                          ),
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return "Email can not be empty";
+                                            } else if (!EmailValidator.validate(
+                                                value, true)) {
+                                              return "Invalid Email Address";
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                        )),
+                                    Container(
+                                        padding: const EdgeInsets.all(10),
+                                        decoration: const BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color:
+                                                        AppColor.lightGrey))),
+                                        child: TextFormField(
+                                          controller: conPass,
+                                          obscureText: true,
+                                          decoration: const InputDecoration(
+                                            icon: Icon(Icons.lock),
+                                            hintText: 'Insert your Password',
+                                            labelText: 'Password',
+                                          ),
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Please enter some text';
+                                            }
+                                            return null;
+                                          },
+                                        )),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 50,
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    emailAuth
+                                        .registerWithEmailAndPassword(
+                                            email: conEmail.text,
+                                            password: conPass.text)
+                                        .then((value) {
+                                      if (value) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text(
+                                                  'User successfully registered')),
+                                        );
+                                        Navigator.pushNamed(context, '/login');
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text(
+                                                  'There is already a registered user with this account')),
+                                        );
+                                      }
+                                    });
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  backgroundColor: AppColor.darkOrange,
+                                  elevation: 2,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 100),
+                                  minimumSize: const Size(0, 40),
+                                ),
+                                child: const Text(
+                                  "New Password",
+                                  style: TextStyle(
+                                      color: AppColor.lightGrey,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 40,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
