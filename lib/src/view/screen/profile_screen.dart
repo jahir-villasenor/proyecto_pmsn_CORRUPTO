@@ -9,7 +9,9 @@ class ProfileScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(child: Image.asset('assets/images/profile_pic.png')),
+          Expanded(
+              child: Image.asset(
+                  './assets/images/profile_pic.png')),
           const Text(
             "Hello Sina!",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
@@ -17,7 +19,9 @@ class ProfileScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/images/github.png', width: 60),
+              Image.asset(
+                  './assets/images/github.png',
+                  width: 60),
               const SizedBox(width: 10),
               const Text(
                 "https://github.com/SinaSys",
