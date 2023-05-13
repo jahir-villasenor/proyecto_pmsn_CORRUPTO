@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/core/app_theme.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/routes.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/login_screen.dart';
+import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/onboading_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         },
       ),
       debugShowCheckedModeBanner: false,
-      home: const LoginScreen(),
+      home: const OnboardingScreen(),
       routes: getApplicationRoutes(),
       theme: AppTheme.lightAppTheme,
     );
