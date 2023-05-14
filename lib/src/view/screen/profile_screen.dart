@@ -1,34 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/widget/profile_menu.dart';
+import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/widget/profile_pics.dart';
+
+import '../../firebase/facebook_auth.dart';
+import '../../firebase/google_auth.dart';
+import '../../model/user_model.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  ProfileScreen({Key? key}) : super(key: key);
+
+  GoogleAuth googleAuth = GoogleAuth();
+
+  FaceAuth faceAuth = FaceAuth();
+
+  UserModel? user;
 
   @override
   Widget build(BuildContext context) {
+    if (ModalRoute.of(context)!.settings.arguments != null) {
+      user = ModalRoute.of(context)!.settings.arguments as UserModel;
+    }
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-              child: Image.asset(
-                  './assets/images/profile_pic.png')),
-          const Text(
-            "Hello Sina!",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+          ProfilePics(),
+          SizedBox(height: 20),
+          ProfileMenu(
+            text: "My Account",
+            icon: "assets/icons/User Icon.svg",
+            press: () => {Navigator.pushNamed( context, '/userprofile',arguments:user )},
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                  './assets/images/github.png',
-                  width: 60),
-              const SizedBox(width: 10),
-              const Text(
-                "https://github.com/SinaSys",
-                style: TextStyle(fontSize: 20),
-              )
-            ],
-          )
+          ProfileMenu(
+            text: "Notifications",
+            icon: "assets/icons/Bell.svg",
+            press: () {},
+          ),
+          ProfileMenu(
+            text: "Settings",
+            icon: "assets/icons/Settings.svg",
+            press: () {},
+          ),
+          ProfileMenu(
+            text: "Help Center",
+            icon: "assets/icons/Question mark.svg",
+            press: () {},
+          ),
+          ProfileMenu(
+            text: "Log Out",
+            icon: "assets/icons/Log out.svg",
+            press: () {},
+          ),
         ],
       ),
     );

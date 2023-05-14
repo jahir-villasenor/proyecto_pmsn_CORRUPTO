@@ -101,7 +101,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         child: TextFormField(
                                           controller: txtemailCont,
                                           decoration: const InputDecoration(
-                                            icon: Icon(Icons.person),
+                                            icon: Icon(Icons.email,
+                                                color: AppColor.darkOrange),
                                             hintText: 'Insert your Email',
                                             labelText: 'Email',
                                           ),
@@ -124,7 +125,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           controller: txtPassController,
                                           obscureText: true,
                                           decoration: const InputDecoration(
-                                            icon: Icon(Icons.lock),
+                                            icon: Icon(Icons.lock,
+                                                color: AppColor.darkOrange),
                                             hintText: 'Insert your Password',
                                             labelText: 'Password',
                                           ),

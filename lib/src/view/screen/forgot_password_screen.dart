@@ -99,7 +99,10 @@ class ForgotScreenState extends State<ForgotScreen> {
                                         child: TextFormField(
                                           controller: conEmail,
                                           decoration: const InputDecoration(
-                                            icon: Icon(Icons.email),
+                                            icon: Icon(
+                                              Icons.email,
+                                              color: AppColor.darkOrange,
+                                            ),
                                             hintText: 'Insert your email',
                                             labelText: 'Email',
                                           ),

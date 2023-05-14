@@ -11,10 +11,10 @@ import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/product_list_
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-  static const List<Widget> screens = [
-    ProductListScreen(),
-    FavoriteScreen(),
-    CartScreen(),
+  static List<Widget> screens = [
+    const ProductListScreen(),
+    const FavoriteScreen(),
+    const CartScreen(),
     ProfileScreen()
   ];
 

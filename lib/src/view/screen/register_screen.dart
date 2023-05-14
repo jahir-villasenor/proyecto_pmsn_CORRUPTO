@@ -103,7 +103,8 @@ class RegisterScreenState extends State<RegisterScreen> {
                                                         AppColor.lightGrey))),
                                         child: TextFormField(
                                           decoration: const InputDecoration(
-                                            icon: Icon(Icons.person),
+                                            icon: Icon(Icons.person,
+                                                color: AppColor.darkOrange),
                                             hintText: 'Insert your Name',
                                             labelText: 'Name',
                                           ),
@@ -125,7 +126,8 @@ class RegisterScreenState extends State<RegisterScreen> {
                                         child: TextFormField(
                                           controller: conEmail,
                                           decoration: const InputDecoration(
-                                            icon: Icon(Icons.email),
+                                            icon: Icon(Icons.email,
+                                                color: AppColor.darkOrange),
                                             hintText: 'Insert your email',
                                             labelText: 'Email',
                                           ),
@@ -152,7 +154,8 @@ class RegisterScreenState extends State<RegisterScreen> {
                                           controller: conPass,
                                           obscureText: true,
                                           decoration: const InputDecoration(
-                                            icon: Icon(Icons.lock),
+                                            icon: Icon(Icons.lock,
+                                                color: AppColor.darkOrange),
                                             hintText: 'Insert your Password',
                                             labelText: 'Password',
                                           ),
