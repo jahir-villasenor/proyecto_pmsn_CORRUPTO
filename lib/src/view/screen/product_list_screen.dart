@@ -79,7 +79,7 @@ class ProductListScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            '30% OFF DURING \nCOVID 19',
+                            '30% OFF DURING \nTHE SEASON',
                             style: Theme.of(context)
                                 .textTheme
                                 .displaySmall

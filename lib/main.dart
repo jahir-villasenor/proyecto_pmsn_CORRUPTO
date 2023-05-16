@@ -3,8 +3,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/core/app_theme.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/routes.dart';
+import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/home_screen.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/login_screen.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/onboading_screen.dart';
+import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/product_prueba_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
         },
       ),
       debugShowCheckedModeBanner: false,
-      home: const OnboardingScreen(),
+      home: const ProductScreen(),
       routes: getApplicationRoutes(),
       theme: AppTheme.lightAppTheme,
     );
