@@ -1,5 +1,4 @@
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/bottom_navy_bar_item.dart';
-import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/product_api.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/recommended_product.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/product_size_type.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/product_category.dart';
@@ -8,19 +7,8 @@ import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/categorical.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/numerical.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/product.dart';
 import 'package:flutter/material.dart';
-import 'package:proyecto_pmsn_villasenor_y_vazquez/src/network/api_products.dart';
 
 class AppData {
-  /*final ApiProducts apiProducts = ApiProducts();
-  List<ProductApi> products = [];
-
-  Future<void> fetchProducts() async {
-    try {
-      products = await apiProducts.getProducts();
-    } catch (e) {
-      debugPrint('Failed to fetch products: $e');
-    }
-  }*/
   const AppData._();
 
   static String dummyText =

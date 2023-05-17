@@ -6,7 +6,6 @@ import 'package:proyecto_pmsn_villasenor_y_vazquez/routes.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/home_screen.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/login_screen.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/onboading_screen.dart';
-import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/product_prueba_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
         },
       ),
       debugShowCheckedModeBanner: false,
-      home: const ProductScreen(),
+      home: const OnboardingScreen(),
       routes: getApplicationRoutes(),
       theme: AppTheme.lightAppTheme,
     );
