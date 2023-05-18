@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/routes.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/provider/flags_provider.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/provider/theme_provider.dart';
+import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/home_screen.dart';
+import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/login_screen.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/screen/onboading_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
