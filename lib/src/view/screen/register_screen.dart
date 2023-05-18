@@ -1,11 +1,13 @@
 import 'package:auth_buttons/auth_buttons.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/core/app_color.dart';
 
 import '../../firebase/email_auth.dart';
 import '../../firebase/facebook_auth.dart';
 import '../../firebase/google_auth.dart';
+import '../../provider/theme_provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -26,7 +28,9 @@ class RegisterScreenState extends State<RegisterScreen> {
   FaceAuth faceAuth = FaceAuth();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData? currentThemeData = themeProvider.getthemeData();
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -64,8 +68,11 @@ class RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(height: 20),
             Expanded(
               child: Container(
-                decoration: const BoxDecoration(
-                    color: AppColor.lightGrey,
+                decoration: BoxDecoration(
+                    color: currentThemeData?.brightness ==
+                                            Brightness.dark
+                                        ? AppColor.modeDark
+                                        : AppColor.modeLight,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
@@ -83,7 +90,10 @@ class RegisterScreenState extends State<RegisterScreen> {
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                    color: AppColor.lightGrey,
+                                    color: currentThemeData?.brightness ==
+                                            Brightness.dark
+                                        ? AppColor.modeDark
+                                        : AppColor.modeLight,
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: const [
                                       BoxShadow(
@@ -311,7 +321,10 @@ class RegisterScreenState extends State<RegisterScreen> {
                                               }
                                             });
                                           },
-                                          themeMode: ThemeMode.light,
+                                          themeMode:currentThemeData?.brightness ==
+                                        Brightness.dark
+                                    ? ThemeMode.dark
+                                    : ThemeMode.light, 
                                           style: const AuthButtonStyle(
                                             buttonType: AuthButtonType.icon,
                                           ),
@@ -380,7 +393,10 @@ class RegisterScreenState extends State<RegisterScreen> {
                                               }
                                             });
                                           },
-                                          themeMode: ThemeMode.light,
+                                          themeMode:currentThemeData?.brightness ==
+                                        Brightness.dark
+                                    ? ThemeMode.dark
+                                    : ThemeMode.light, 
                                           style: const AuthButtonStyle(
                                             buttonType: AuthButtonType.icon,
                                           ),

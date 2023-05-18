@@ -1,10 +1,12 @@
 import 'package:auth_buttons/auth_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/core/app_color.dart';
 
 import '../../firebase/email_auth.dart';
 import '../../firebase/facebook_auth.dart';
 import '../../firebase/google_auth.dart';
+import '../../provider/theme_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -24,6 +26,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData? currentThemeData = themeProvider.getthemeData();
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -61,9 +66,11 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 20),
             Expanded(
               child: Container(
-                decoration: const BoxDecoration(
-                    color: AppColor.lightGrey,
-                    borderRadius: BorderRadius.only(
+                decoration: BoxDecoration(
+                    color: currentThemeData?.brightness == Brightness.dark
+                        ? AppColor.modeDark
+                        : AppColor.modeLight,
+                    borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
                 child: SingleChildScrollView(
@@ -80,7 +87,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                    color: AppColor.lightGrey,
+                                    color: currentThemeData?.brightness ==
+                                            Brightness.dark
+                                        ? AppColor.modeDark
+                                        : AppColor.modeLight,
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: const [
                                       BoxShadow(
@@ -277,7 +287,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                               setState(() {});
                                             });
                                           },
-                                          themeMode: ThemeMode.light,
+                                          themeMode:currentThemeData?.brightness ==
+                                        Brightness.dark
+                                    ? ThemeMode.dark
+                                    : ThemeMode.light, 
                                           style: const AuthButtonStyle(
                                             buttonType: AuthButtonType.icon,
                                           ),
@@ -331,7 +344,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                               }
                                             });
                                           },
-                                          themeMode: ThemeMode.light,
+                                         themeMode:currentThemeData?.brightness ==
+                                        Brightness.dark
+                                    ? ThemeMode.dark
+                                    : ThemeMode.light, 
                                           style: const AuthButtonStyle(
                                             buttonType: AuthButtonType.icon,
                                           ),
