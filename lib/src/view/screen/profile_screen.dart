@@ -29,7 +29,8 @@ class ProfileScreen extends StatelessWidget {
           ProfileMenu(
             text: "My Account",
             icon: "assets/icons/User Icon.svg",
-            press: () => {Navigator.pushNamed( context, '/userprofile',arguments:user )},
+            press: () =>
+                {Navigator.pushNamed(context, '/userprofile', arguments: user)},
           ),
           ProfileMenu(
             text: "Notifications",
@@ -39,7 +40,8 @@ class ProfileScreen extends StatelessWidget {
           ProfileMenu(
             text: "Settings",
             icon: "assets/icons/Settings.svg",
-            press: () {},
+            press: () =>
+                {Navigator.pushNamed(context, '/settings', arguments: user)},
           ),
           ProfileMenu(
             text: "Help Center",
