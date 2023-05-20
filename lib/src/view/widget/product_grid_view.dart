@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/product.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/animation/open_container_wrapper.dart';
@@ -57,7 +58,12 @@ class ProductGridView extends StatelessWidget {
         color: const Color(0xFFE5E6E8),
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Image.asset(product.images[0], scale: 3),
+      child: CachedNetworkImage(
+        imageUrl: product.images[0],
+        fit: BoxFit.cover,
+        placeholder: (context, url) => CircularProgressIndicator(),
+        errorWidget: (context, url, error) => Icon(Icons.error),
+      ),
     );
   }
 

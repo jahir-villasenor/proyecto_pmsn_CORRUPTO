@@ -159,9 +159,18 @@ class ProductListScreen extends StatelessWidget {
     );
   }
 
+  void fetchData() {
+    controller.fetchProductsAndCategories();
+  }
+
+  @override
+  void onAppear() {
+    fetchData();
+  }
+
   @override
   Widget build(BuildContext context) {
-    controller.getAllItems();
+    fetchData();
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: _appBar,

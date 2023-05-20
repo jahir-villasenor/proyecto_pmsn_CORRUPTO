@@ -1,3 +1,4 @@
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/product_size_type.dart';
 
 enum ProductType { all, watch, mobile, headphone, tablet, tv }
@@ -34,4 +35,9 @@ class Product {
     required this.rating,
     required this.type,
   }) : _quantity = quantity;
+
+  @override
+  String toString() {
+    return 'Product{name: $name, price: $price, about: $about, isAvailable: $isAvailable, off: $off, quantity: $quantity, images: $images, isFavorite: $isFavorite, rating: $rating, type: $type}';
+  }
 }

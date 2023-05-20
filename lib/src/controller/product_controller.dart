@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/core/app_data.dart';
+import 'package:proyecto_pmsn_villasenor_y_vazquez/src/firebase/firestore_products.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/product.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/numerical.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -7,11 +9,36 @@ import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/product_category.da
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/product_size_type.dart';
 
 class ProductController extends GetxController {
-  List<Product> allProducts = AppData.products;
-  RxList<Product> filteredProducts = AppData.products.obs;
+  RxList<Product> allProducts = <Product>[].obs;
+  RxList<Product> filteredProducts = <Product>[].obs;
   RxList<Product> cartProducts = <Product>[].obs;
   RxList<ProductCategory> categories = AppData.categories.obs;
   RxInt totalPrice = 0.obs;
+
+  final firestoreProducts = FirestoreProducts();
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchProductsAndCategories();
+  }
+
+  Future<void> fetchProductsAndCategories() async {
+    try {
+      /*List<ProductCategory> fetchedCategories =
+          await firestoreProducts.getCategories();
+      categories.assignAll(fetchedCategories);*/
+
+      List<Product> fetchedProducts = await firestoreProducts.getProducts();
+      allProducts.assignAll(fetchedProducts);
+      filteredProducts.assignAll(fetchedProducts);
+
+      update();
+    } catch (error) {
+      print('Error al obtener los productos y categorias: $error');
+    }
+  }
 
   void filterItemsByCategory(int index) {
     for (ProductCategory element in categories) {
@@ -30,7 +57,16 @@ class ProductController extends GetxController {
   }
 
   void isFavorite(int index) {
-    filteredProducts[index].isFavorite = !filteredProducts[index].isFavorite;
+    final product = filteredProducts[index];
+    final productName = product.name;
+    final newIsFavoriteValue = !product.isFavorite;
+
+    firestoreProducts.updateProduct(productName, newIsFavoriteValue).then((_) {
+      product.isFavorite = newIsFavoriteValue;
+      update();
+    });
+
+    product.isFavorite = newIsFavoriteValue;
     update();
   }
 

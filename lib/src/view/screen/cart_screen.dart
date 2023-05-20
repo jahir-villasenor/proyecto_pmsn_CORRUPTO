@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/core/extensions.dart';
@@ -51,8 +52,8 @@ class CartScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       child: Padding(
                         padding: const EdgeInsets.all(5),
-                        child: Image.asset(
-                          product.images[0],
+                        child: CachedNetworkImage(
+                          imageUrl: product.images[0],
                           width: 100,
                           height: 90,
                         ),

@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         },
       ),
       debugShowCheckedModeBanner: false,
-      home: const OnboardingScreen(),
+      home: const HomeScreen(),
       routes: getApplicationRoutes(),
       theme: AppTheme.lightAppTheme,
     );

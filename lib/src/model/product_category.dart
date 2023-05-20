@@ -7,4 +7,9 @@ class ProductCategory {
   IconData icon;
 
   ProductCategory(this.type, this.isSelected, this.icon);
+
+  @override
+  String toString() {
+    return 'ProductCategory{type: $type, isSelected: $isSelected, icon $icon}';
+  }
 }

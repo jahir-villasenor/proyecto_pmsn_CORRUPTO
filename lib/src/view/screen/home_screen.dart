@@ -1,3 +1,6 @@
+import 'package:proyecto_pmsn_villasenor_y_vazquez/src/firebase/firestore_products.dart';
+import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/product.dart';
+import 'package:proyecto_pmsn_villasenor_y_vazquez/src/model/product_category.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/src/view/widget/page_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
@@ -24,9 +27,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int newIndex = 0;
+  FirestoreProducts firestoreProducts = FirestoreProducts();
+
+  void fetchData() async {
+    List<ProductCategory> categories = await firestoreProducts.getCategories();
+    List<Product> products = await firestoreProducts.getProducts();
+
+    print('Categorías recibidas: $categories');
+    print('Productos recibidos: $products');
+  }
 
   @override
   Widget build(BuildContext context) {
+    fetchData();
     return PageWrapper(
       child: Scaffold(
         bottomNavigationBar: BottomNavyBar(

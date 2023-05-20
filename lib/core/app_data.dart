@@ -179,13 +179,13 @@ class AppData {
     ProductCategory(
       ProductType.mobile,
       false,
-      FontAwesomeIcons.mobileScreenButton,
+      Icons.tablet_mac,
     ),
     ProductCategory(ProductType.watch, false, Icons.watch),
     ProductCategory(
       ProductType.tablet,
       false,
-      FontAwesomeIcons.tablet,
+      Icons.tablet,
     ),
     ProductCategory(
       ProductType.headphone,

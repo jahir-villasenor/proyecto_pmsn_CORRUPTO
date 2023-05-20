@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_pmsn_villasenor_y_vazquez/core/app_color.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -33,7 +34,10 @@ class _CarouselSliderState extends State<CarouselSlider> {
             itemBuilder: (_, index) {
               return FittedBox(
                 fit: BoxFit.none,
-                child: Image.asset(widget.items[index], scale: 3),
+                child: CachedNetworkImage(
+                  imageUrl: widget.items[index],
+                  fit: BoxFit.none,
+                ),
               );
             },
           ),
